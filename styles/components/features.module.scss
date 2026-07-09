@@ -1,0 +1,12 @@
+@use "../utils/mixins";
+
+.features {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+
+  @include mixins.mq(md) {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
