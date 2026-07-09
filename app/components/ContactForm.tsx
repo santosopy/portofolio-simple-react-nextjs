@@ -4,8 +4,10 @@ import styles from "@/styles/components/form.module.scss";
 import * as yup from "yup";
 import { FormData } from "@/app/types/form";
 import { contactSchema } from "@/app/lib/validation/contactSchema";
+import { useRouter } from "next/navigation";
 
 export default function ContactForm() {
+  const router = useRouter();
   const [form, setForm] = useState<FormData>({
     name: "",
     email: "",
@@ -55,12 +57,8 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (await validate()) {
-      alert("送信成功！");
-      setForm({
-        name: "",
-        email: "",
-        message: "",
-      });
+      const query = new URLSearchParams(form).toString();
+      router.push(`/confirm?${query}`);
     }
   };
 
