@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Contact Form App (Next.js Portfolio)
 
-## Getting Started
+## 概要
+本プロジェクトは、Next.js（App Router）とTypeScriptを用いて作成したお問い合わせフォームアプリです。  
+入力 → 確認 → 送信完了までの一連のフローを実装し、実務を想定したフォーム設計・バリデーション・状態管理を意識して開発しました。  
+また、実務で求められるフォーム実装スキルの向上を目的として作成しました。
 
-First, run the development server:
+---
+
+## 使用技術
+
+- Next.js（App Router）
+- React
+- TypeScript
+- SCSS（CSS Modules）
+- Yup（バリデーション）
+- Supabase（データ保存）
+
+---
+
+## 技術選定の理由
+
+### Next.js（App Router）
+ページ遷移（入力 → 確認 → 完了）をシンプルに構成できるため採用しました。  
+ファイルベースのルーティングにより構造が明確になり、保守性の高い実装が可能です。
+
+### TypeScript
+フォームデータやバリデーションの型安全性を確保するために使用しています。  
+型定義により、実装時のミス防止と可読性向上を意識しました。
+
+### Yup
+バリデーションロジックをスキーマとして分離するために採用しました。  
+コンポーネントからロジックを切り離すことで、再利用性と保守性を向上させています。
+
+### SCSS（CSS Modules）
+コンポーネント単位でスタイルを管理するために使用しています。  
+クラス名のスコープを限定し、スタイルの衝突を防止しています。
+
+### Supabase
+簡易的なバックエンドとして採用し、フォーム送信データの保存を実装しています。
+
+---
+
+## 実装ポイント
+
+### フォーム状態管理
+ReactのuseStateを用いて、入力データとエラー状態を分離して管理しています。
+
+### バリデーション
+Yupによるスキーマバリデーションを実装し、以下を考慮しています：
+
+- 全フィールドの一括検証（abortEarly: false）
+- エラーメッセージのフィールド単位管理
+- エラー状態の即時更新
+
+### UXの改善
+- 入力時に該当フィールドのエラーを即時解除
+- 未入力またはエラーがある場合は送信ボタンを無効化
+- ユーザーの操作に応じたフィードバックを意識
+
+### 画面遷移
+Next.jsのuseRouterを使用し、確認画面へ遷移  
+URLクエリを用いてフォームデータを受け渡ししています
+
+---
+
+## 動作方法
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
